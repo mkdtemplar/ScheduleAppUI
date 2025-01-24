@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "148390069936",
+    "project_id": "schedulingapp-client",
+    "storage_bucket": "schedulingapp-client.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148390069936:android:87977168c829bb96e91d75",
+        "android_client_info": {
+          "package_name": "com.example.scheduleappui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoQZpOJ4KzN_YJd8DWK5pz9m2gElrk-KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
