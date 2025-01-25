@@ -12,8 +12,8 @@ import com.example.scheduleappui.ui.theme.Browse
 import com.example.scheduleappui.ui.theme.Home
 import com.example.scheduleappui.ui.theme.Library
 import com.example.scheduleappui.ui.theme.LoginScreen
-import com.example.scheduleappui.ui.theme.MainView
-import com.example.scheduleappui.ui.theme.Subscription
+import com.example.scheduleappui.ui.theme.Positions
+import com.example.scheduleappui.ui.theme.Shift
 
 @Composable
 fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, viewModel: MainViewModel, pd:PaddingValues){
@@ -33,8 +33,12 @@ fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, v
         composable(Screen.DrawerScreen.Account.route){
             AccountView()
         }
-        composable(Screen.DrawerScreen.Subscription.route){
-            Subscription()
+        composable(Screen.DrawerScreen.Position.route){
+            Positions()
+        }
+
+        composable(Screen.DrawerScreen.Shift.route) {
+            Shift()
         }
 
         composable(Screen.BottomScreen.Home.bRoute) {

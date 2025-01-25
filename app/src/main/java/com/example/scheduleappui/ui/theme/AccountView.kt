@@ -39,8 +39,7 @@ fun AccountView(){
                     modifier = Modifier.padding(end = 8.dp)
                 )
                 Column {
-                    Text("Ivan Learning")
-                    Text("Kotlin")
+                    Text("V.I.P Entrance")
                 }
             }
             IconButton(onClick = {}){
@@ -52,10 +51,10 @@ fun AccountView(){
         Row(modifier = Modifier.padding(top = 16.dp)) {
             Icon(
                 painter = painterResource(id = com.example.scheduleappui.R.drawable.baseline_music_video_24),
-                contentDescription = "My Music",
+                contentDescription = "My Shifts",
                 modifier = Modifier.padding(end = 8.dp)
             )
-            Text(text = "My Music")
+            Text(text = "My Shifts")
         }
         Divider()
 

@@ -8,7 +8,8 @@ import com.example.scheduleappui.R
 
 @Composable
 fun Browse() {
-    val categories = listOf("Workout", "Taekwondo", "Kickboxing", "Metal")
+    val categories = listOf("V.I.P Entrance Assignments", "Main Entrance Assignments",
+        "Armory Assignments", "Potus Assignments")
     LazyVerticalGrid(GridCells.Fixed(2)) {
         items(categories) {
             cat ->

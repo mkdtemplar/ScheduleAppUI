@@ -25,8 +25,8 @@ import com.example.scheduleappui.R
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home() {
-    val categories = listOf("Workout", "Taekwondo", "Kickboxing", "Metal")
-    val gruped = listOf<String>("New releases", "Favorites", "Top rated").groupBy { it[0] }
+    val categories = listOf("V.I.P Entrance", "Main Entrance", "Main Entrance", "Main Entrance", "Restricted")
+    val gruped = listOf<String>("Day Shift", "Evening Shift", "Night Shift").groupBy { it[0] }
 
     LazyColumn {
         gruped.forEach {
