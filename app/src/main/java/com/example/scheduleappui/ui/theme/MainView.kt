@@ -1,5 +1,6 @@
 package com.example.scheduleappui.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -67,6 +68,7 @@ import com.example.scheduleappui.screenInBottom
 import com.example.scheduleappui.screensInDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -184,11 +186,7 @@ fun MainView(){
                 }
             }
         ) {
-            Navigation(
-                navController = controller, viewModel = viewModel, pd = it,
-                authViewModel = authViewModel
-            )
-            AccountDialog(dialogOpen = dialogOpen)
+            Navigation(controller, authViewModel, viewModel, it)
         }
     }
 }

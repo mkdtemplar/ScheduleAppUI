@@ -13,8 +13,7 @@ sealed class Screen(val title : String, val route : String) {
                 object Shift : DrawerScreen("Shift", "shift",
                     R.drawable.baseline_person_add_alt_1_24
                     )
-                object LoginScreen : DrawerScreen("Login", "login",
-                    R.drawable.baseline_login_24)
+
             }
     sealed class BottomScreen(val bTitle : String, val bRoute : String, @DrawableRes val icon : Int) :
             Screen(bTitle, bRoute) {
@@ -26,6 +25,7 @@ sealed class Screen(val title : String, val route : String) {
             R.drawable.baseline_article_24)
             }
     object HomeScreen : Screen("Home", "home")
+    object LoginScreen : Screen("Login", "login")
 }
 
 val screenInBottom = listOf(
