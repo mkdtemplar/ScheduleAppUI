@@ -3,10 +3,6 @@ package com.example.scheduleappui
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -16,7 +12,6 @@ import com.example.scheduleappui.ui.theme.Browse
 import com.example.scheduleappui.ui.theme.Home
 import com.example.scheduleappui.ui.theme.Library
 import com.example.scheduleappui.ui.theme.LoginScreen
-import com.example.scheduleappui.ui.theme.MainView
 import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shift
 

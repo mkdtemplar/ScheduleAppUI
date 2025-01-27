@@ -144,6 +144,9 @@ fun MainView(){
                     actions = {
                         IconButton(
                             onClick = {
+                                controller.navigate(Screen.LoginScreen.route) {
+                                    popUpTo(Screen.HomeScreen.route) {inclusive = true}
+                                }
                                 scope.launch {
                                     if (modalSheetState.isVisible) modalSheetState.hide()
                                     else modalSheetState.show()
