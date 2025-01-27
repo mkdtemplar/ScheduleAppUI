@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import com.example.scheduleappui.Result
 
-class UserRepository(private val auth : FirebaseAuth, private val firestore: FirebaseFirestore) {
+class UserRepository(private val auth : FirebaseAuth) {
 
     suspend fun login(email: String, password: String): Result<Boolean> =
         try {
