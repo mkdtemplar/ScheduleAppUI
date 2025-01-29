@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import com.example.scheduleappui.AuthViewModel
 import com.example.scheduleappui.Result
 
+
 @Composable
+
 fun LoginScreen(
     authViewModel: AuthViewModel,
     onSignInSuccess:  () -> Unit,

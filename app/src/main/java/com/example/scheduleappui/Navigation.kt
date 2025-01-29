@@ -3,6 +3,10 @@ package com.example.scheduleappui
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,23 +16,28 @@ import com.example.scheduleappui.ui.theme.Browse
 import com.example.scheduleappui.ui.theme.Home
 import com.example.scheduleappui.ui.theme.Library
 import com.example.scheduleappui.ui.theme.LoginScreen
+import com.example.scheduleappui.ui.theme.MainView
 import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shift
 
 @Composable
-fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, viewModel: MainViewModel, pd : PaddingValues){
-
+fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, viewModel: MainViewModel){
+    var isLoggedIn by remember { mutableStateOf(false) }
     NavHost(navController = navController,
-        startDestination =  Screen.LoginScreen.route, modifier = Modifier.padding(pd)){
+        startDestination = if (isLoggedIn) Screen.HomeScreen.route else Screen.LoginScreen.route){
 
         composable(Screen.LoginScreen.route) {
             LoginScreen(
                 authViewModel = authViewModel,
                 onSignInSuccess = {
-                   navController.navigate(Screen.DrawerScreen.Account.route)
-
+                    isLoggedIn = true
+                   navController.navigate(Screen.HomeScreen.route)
                 }
             )
+        }
+
+        composable(Screen.HomeScreen.route) {
+            MainView()
         }
 
         composable(Screen.DrawerScreen.Account.route){

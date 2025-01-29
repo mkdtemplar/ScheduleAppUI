@@ -24,7 +24,7 @@ sealed class Screen(val title : String, val route : String) {
                 object Browse : BottomScreen("Assignments", "assignments",
             R.drawable.baseline_article_24)
             }
-    object HomeScreen : Screen("Home", "home")
+    object HomeScreen : Screen("MainScreen", "main-screen")
     object LoginScreen : Screen("Login", "login")
 }
 

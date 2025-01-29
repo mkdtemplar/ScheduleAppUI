@@ -70,6 +70,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainView(){
@@ -144,9 +145,6 @@ fun MainView(){
                     actions = {
                         IconButton(
                             onClick = {
-                                controller.navigate(Screen.LoginScreen.route) {
-                                    popUpTo(Screen.HomeScreen.route) {inclusive = true}
-                                }
                                 scope.launch {
                                     if (modalSheetState.isVisible) modalSheetState.hide()
                                     else modalSheetState.show()
@@ -189,7 +187,7 @@ fun MainView(){
                 }
             }
         ) {
-            Navigation(controller, authViewModel, viewModel, it)
+            Navigation(controller, authViewModel, viewModel)
         }
     }
 }
