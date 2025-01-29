@@ -31,7 +31,9 @@ fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, v
                 authViewModel = authViewModel,
                 onSignInSuccess = {
                     isLoggedIn = true
-                   navController.navigate(Screen.HomeScreen.route)
+                   navController.navigate(Screen.HomeScreen.route) {
+                       popUpTo(Screen.LoginScreen.route) {inclusive = true}
+                   }
                 }
             )
         }
