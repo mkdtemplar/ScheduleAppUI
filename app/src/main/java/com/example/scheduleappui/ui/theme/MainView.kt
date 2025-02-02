@@ -49,7 +49,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -60,7 +59,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.scheduleappui.AuthViewModel
 import com.example.scheduleappui.MainViewModel
 import com.example.scheduleappui.Navigation
 import com.example.scheduleappui.R
@@ -100,8 +98,6 @@ fun MainView(){
         initialValue = ModalBottomSheetValue.Hidden,
         confirmValueChange = {it != ModalBottomSheetValue.HalfExpanded}
     )
-
-    val authViewModel : AuthViewModel = viewModel()
 
     val roundedCornerRadius = if(isSheetFullScreen) 0.dp else 12.dp
 
