@@ -49,6 +49,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -69,8 +70,6 @@ import com.example.scheduleappui.screensInDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainView(){
@@ -187,7 +186,7 @@ fun MainView(){
                 }
             }
         ) {
-            Navigation(controller, authViewModel, viewModel)
+            Navigation(controller, viewModel, it)
         }
     }
 }
@@ -198,7 +197,7 @@ fun DrawerItem(
     item: Screen.DrawerScreen,
     onDrawerItemClicked : () -> Unit
 ){
-    val background = if (selected) Color.DarkGray else Color.White
+    val background = if (selected) Color.Red else Color.White
     Row(
         Modifier
             .fillMaxWidth()

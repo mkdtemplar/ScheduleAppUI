@@ -21,26 +21,10 @@ import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shift
 
 @Composable
-fun Navigation(navController: NavHostController, authViewModel: AuthViewModel, viewModel: MainViewModel){
-    var isLoggedIn by remember { mutableStateOf(false) }
+fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : PaddingValues){
+
     NavHost(navController = navController,
-        startDestination = if (isLoggedIn) Screen.HomeScreen.route else Screen.LoginScreen.route){
-
-        composable(Screen.LoginScreen.route) {
-            LoginScreen(
-                authViewModel = authViewModel,
-                onSignInSuccess = {
-                    isLoggedIn = true
-                   navController.navigate(Screen.HomeScreen.route) {
-                       popUpTo(Screen.LoginScreen.route) {inclusive = true}
-                   }
-                }
-            )
-        }
-
-        composable(Screen.HomeScreen.route) {
-            MainView()
-        }
+        startDestination = Screen.DrawerScreen.Account.route, modifier = Modifier.padding(pd) ){
 
         composable(Screen.DrawerScreen.Account.route){
             AccountView()
