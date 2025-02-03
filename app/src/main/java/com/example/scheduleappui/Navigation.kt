@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.scheduleappui.ui.theme.AccountView
 import com.example.scheduleappui.ui.theme.Browse
 import com.example.scheduleappui.ui.theme.Home
-import com.example.scheduleappui.ui.theme.Library
+import com.example.scheduleappui.ui.theme.PositionsBottomScreen
 import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shift
 
@@ -39,8 +39,8 @@ fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : 
             Browse()
         }
 
-        composable(Screen.BottomScreen.Library.bRoute) {
-            Library()
+        composable(Screen.BottomScreen.Positions.bRoute) {
+            PositionsBottomScreen()
         }
 
     }

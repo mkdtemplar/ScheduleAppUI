@@ -19,19 +19,17 @@ sealed class Screen(val title : String, val route : String) {
             Screen(bTitle, bRoute) {
                 object Home : BottomScreen("Home", "home",
             R.drawable.baseline_music_video_24)
-                object Library : BottomScreen("Positions", "Positions",
+                object Positions : BottomScreen("Positions", "Positions",
             R.drawable.baseline_library_music_24)
                 object Browse : BottomScreen("Assignments", "assignments",
             R.drawable.baseline_article_24)
             }
-    object HomeScreen : Screen("MainScreen", "main-screen")
-    object LoginScreen : Screen("Login", "login")
 }
 
 val screenInBottom = listOf(
     Screen.BottomScreen.Home,
     Screen.BottomScreen.Browse,
-    Screen.BottomScreen.Library
+    Screen.BottomScreen.Positions
 )
 
 val screensInDrawer = listOf(

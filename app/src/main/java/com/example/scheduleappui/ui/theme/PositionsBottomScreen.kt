@@ -24,16 +24,16 @@ import com.example.scheduleappui.Dummy
 import com.example.scheduleappui.libraries
 
 @Composable
-fun Library() {
+fun PositionsBottomScreen() {
     LazyColumn() {
         items(libraries) {
-            lib -> LibItem(lib)
+            lib -> PositionBottomItem(lib)
         }
     }
 }
 
 @Composable
-fun LibItem(lib : Dummy) {
+fun PositionBottomItem(lib : Dummy) {
     Column {
         Row(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween

@@ -14,14 +14,16 @@ import androidx.compose.ui.unit.sp
 import com.example.scheduleappui.data.Position
 
 @Composable
-fun PositionItem(position: Position) {
+fun PositionItem(position: Position, onClickOpenDetails : () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = position.name, fontSize = 16.sp, fontWeight = FontWeight.Normal)
         OutlinedButton(
-            onClick = {},
+            onClick = {
+                onClickOpenDetails()
+            },
             content = {Text(text = "Details")}
         )
     }
