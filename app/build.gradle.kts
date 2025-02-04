@@ -60,7 +60,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    val nav_version = "2.8.5"
+    val nav_version = "2.8.6"
 
     val lifecycle_version = "2.8.7"
     val arch_version = "2.2.0"
@@ -78,18 +78,18 @@ dependencies {
 
     // Saved state module for ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
-    implementation("androidx.compose.runtime:runtime:1.7.6")
-    implementation("androidx.compose.runtime:runtime-livedata:1.7.6")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.7.6")
+    implementation("androidx.compose.runtime:runtime:1.7.7")
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.7")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.7.7")
 
     // Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("androidx.compose.material:material:1.7.6")
-    implementation("androidx.compose.ui:ui:1.7.6")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.6")
+    implementation("androidx.navigation:navigation-compose:2.8.6")
+    implementation("androidx.compose.material:material:1.7.7")
+    implementation("androidx.compose.ui:ui:1.7.7")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.7")
 
     // Views/Fragments integration
     implementation("androidx.navigation:navigation-fragment:$nav_version")
@@ -109,4 +109,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-auth:23.1.0")
     implementation("com.google.firebase:firebase-firestore:25.1.1")
+
+    implementation("com.google.android.gms:play-services-gcm:17.0.0")
+
 }

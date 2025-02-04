@@ -24,7 +24,9 @@ class PositionViewModel : ViewModel() {
     fun loadPositions() {
         viewModelScope.launch {
             when (val result = positionRepository.getPositions()) {
-                is Result.Error -> {}
+                is Result.Error -> {
+                    _positions.value = emptyList()
+                }
                 is Result.Success -> _positions.value = result.data
             }
         }
