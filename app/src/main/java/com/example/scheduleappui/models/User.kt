@@ -1,4 +1,4 @@
-package com.example.scheduleappui.data
+package com.example.scheduleappui.models
 
 data class User(
     val firstName: String,

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.scheduleappui.data.Position
+import com.example.scheduleappui.models.Position
 import com.example.scheduleappui.repository.PositionRepository
 import kotlinx.coroutines.launch
 

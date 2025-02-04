@@ -1,6 +1,6 @@
 package com.example.scheduleappui.repository
 
-import com.example.scheduleappui.data.Position
+import com.example.scheduleappui.models.Position
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import com.example.scheduleappui.Result

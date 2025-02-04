@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.grid.items
 import com.example.scheduleappui.R
 
 @Composable
-fun Browse() {
+fun AssignmentsLibraryBrowse() {
     val categories = listOf("V.I.P Entrance Assignments", "Main Entrance Assignments",
         "Armory Assignments", "Potus Assignments")
     LazyVerticalGrid(GridCells.Fixed(2)) {
