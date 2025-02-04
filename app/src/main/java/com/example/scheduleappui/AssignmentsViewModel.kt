@@ -1,5 +1,6 @@
 package com.example.scheduleappui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,14 +25,18 @@ class AssignmentsViewModel : ViewModel() {
 
     fun loadAssignments() {
         viewModelScope.launch {
-            when(val result = assignmentsRepository.getAllAssigments()) {
+            when (val result = assignmentsRepository.getAllAssigments()) {
                 is Result.Success -> {
                     _assignments.value = result.data
+                    Log.d("AssignmentsViewModel", "Assignments loaded: ${result.data.size} items")
                 }
-                is Result.Error -> {}
+                is Result.Error -> {
+                    Log.e("AssignmentsViewModel", "Error loading assignments", result.exception)
+                }
             }
         }
     }
+
 }
 
 object InjectionAssigments {
