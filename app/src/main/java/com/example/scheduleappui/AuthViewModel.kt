@@ -29,6 +29,11 @@ class AuthViewModel : ViewModel() {
             _authResult.value = userRepository.login(email, password)
         }
     }
+    fun logout () {
+        viewModelScope.launch {
+            _authResult.value = userRepository.logout()
+        }
+    }
 }
 
 object Injection {

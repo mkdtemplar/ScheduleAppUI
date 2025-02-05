@@ -1,6 +1,7 @@
 package com.example.scheduleappui.ui.theme
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,11 +47,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -59,12 +62,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.scheduleappui.AuthViewModel
 import com.example.scheduleappui.MainViewModel
 import com.example.scheduleappui.Navigation
 import com.example.scheduleappui.R
 import com.example.scheduleappui.Screen
 import com.example.scheduleappui.screenInBottom
 import com.example.scheduleappui.screensInDrawer
+import com.example.scheduleappui.userpreferences.UserPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -81,6 +86,8 @@ fun MainView(){
     val controller: NavHostController = rememberNavController()
     val navBackStackEntry by controller.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    val authViewModel : AuthViewModel = viewModel()
+    val context = LocalContext.current
 
     val dialogOpen = remember{
         mutableStateOf(false)
@@ -128,7 +135,11 @@ fun MainView(){
     }
 
     ModalBottomSheetLayout(sheetContent = {
-        MoreBottomSheet(modifier = modifier)
+        MoreBottomSheet(
+            modifier = modifier,
+            authViewModel = authViewModel,
+            context = context,
+        )
     },
         sheetState = modalSheetState,
         sheetShape = RoundedCornerShape(topStart = roundedCornerRadius, topEnd = roundedCornerRadius)
@@ -215,7 +226,8 @@ fun DrawerItem(
 }
 
 @Composable
-fun MoreBottomSheet(modifier: Modifier) {
+fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: Context) {
+
     Box(
         Modifier.fillMaxWidth().height(300.dp).background(
             MaterialTheme.colors.primarySurface)
@@ -225,14 +237,24 @@ fun MoreBottomSheet(modifier: Modifier) {
             Row(modifier = Modifier.padding(16.dp)) {
                 Icon(modifier = Modifier.padding(end = 8.dp),
                     painter = painterResource(R.drawable.baseline_settings_24),
-                    contentDescription = "Settings")
-                Text(text = "Settings", fontSize = 20.sp, color = Color.White)
+                    contentDescription = "Annual Leave Request")
+                Text(text = "Annual Leave Request", fontSize = 20.sp, color = Color.White)
             }
-            Row(modifier = Modifier.padding(16.dp)) {
-                Icon(modifier = Modifier.padding(end = 8.dp),
+            Row(modifier = Modifier.padding(16.dp).clickable{
+                authViewModel.logout()
+                UserPreferences.clearEmail(context)
+                val activity  = context as? android.app.Activity
+                activity?.finishAffinity()
+            }) {
+                Icon(modifier = Modifier.padding(end = 8.dp).clickable{
+                    authViewModel.logout()
+                    UserPreferences.clearEmail(context)
+                    val activity  = context as? android.app.Activity
+                    activity?.finishAffinity()
+                },
                     painter = painterResource(R.drawable.baseline_share_24),
-                    contentDescription = "Share")
-                Text(text = "Share", fontSize = 20.sp, color = Color.White)
+                    contentDescription = "Logout and Close")
+                Text(text = "Logout and Close", fontSize = 20.sp, color = Color.White)
             }
             Row(modifier = Modifier.padding(16.dp)) {
                 Icon(modifier = Modifier.padding(end = 8.dp),

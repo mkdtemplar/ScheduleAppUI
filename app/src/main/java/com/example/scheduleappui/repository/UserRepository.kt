@@ -15,4 +15,11 @@ class UserRepository(private val auth: FirebaseAuth, instance: FirebaseFirestore
         } catch (e: Exception) {
             Result.Error(e)
         }
+
+    fun logout()  : Result<Boolean> = try {
+        auth.signOut()
+        Result.Success(true)
+    } catch (e : Exception) {
+        Result.Error(e)
+    }
 }

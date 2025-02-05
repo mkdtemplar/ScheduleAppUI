@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.example.scheduleappui.AuthViewModel
 import com.example.scheduleappui.R
 import com.example.scheduleappui.Result
+import com.example.scheduleappui.userpreferences.UserPreferences
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,6 +82,10 @@ fun LoginScreen(
                     when (result) {
                         is Result.Success -> {
                             onSignInSuccess()
+                            UserPreferences.saveEmail(context, email)
+                            Toast.makeText(context,
+                                "You are logged in with email ${UserPreferences.getEmail(context)}",
+                                Toast.LENGTH_LONG).show()
                         }
                         is Result.Error -> {
                             Toast.makeText(context, "Login Failed", Toast.LENGTH_LONG).show()
