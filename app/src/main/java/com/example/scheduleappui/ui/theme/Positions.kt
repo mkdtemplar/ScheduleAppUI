@@ -1,8 +1,10 @@
 package com.example.scheduleappui.ui.theme
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,22 +12,31 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Card
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Divider
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 //noinspection UsingMaterialAndMaterial3Libraries
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.primarySurface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -36,12 +47,17 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.scheduleappui.PositionViewModel
 import com.example.scheduleappui.screen.PositionItem
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.window.DialogProperties
 
 @Composable
 fun Positions() {
     val positionViewModel : PositionViewModel = viewModel()
     val positions by positionViewModel.positions.observeAsState(emptyList())
-    val context = LocalContext.current
+    var showDialog by remember { mutableStateOf(false) }
+    var positionDetails by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -56,7 +72,8 @@ fun Positions() {
                             position -> PositionItem(
                         position,
                         onClickOpenDetails = {
-                            Toast.makeText(context, position.name, Toast.LENGTH_LONG).show()
+                           positionDetails = position.name
+                            showDialog = true
                         }
                     )
                         Row(
@@ -68,19 +85,48 @@ fun Positions() {
                     }
 
                 }
-               Divider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 8.dp))
-                Column {
-                    Row(Modifier.padding(vertical = 16.dp)) {
-                        Icon(
-                            imageVector = Icons.Default.AccountBox,
-                            contentDescription = "Get Position info"
-                        )
-                        Text(text = "Get Position info", modifier = Modifier.clickable{},
-                            textAlign = TextAlign.Center
-                        )
-                    }
+            }
+            if (showDialog) {
+                AlertDialogPosition(positionDetails) {
+                    showDialog = false
                 }
             }
         }
     }
+}
+
+@Composable
+fun AlertDialogPosition(positionDetails : String, onDismiss: () -> Unit) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
+            title = {Text(text = "Position details")},
+            text = {
+                Column(modifier = Modifier.height(150.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+
+                    Box( modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(8.dp)) {
+                        Text(text = positionDetails)
+                    }
+                }
+            },
+            buttons = {
+                Box(modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center ) {
+                    Button(onClick = onDismiss) {
+                        Text("Dismiss", fontStyle = FontStyle.Italic, textAlign = TextAlign.Center)
+                    }
+                }
+            },
+            modifier = Modifier.fillMaxWidth().
+            background(MaterialTheme.colors.primarySurface).padding(8.dp),
+            shape = RoundedCornerShape(5.dp),
+            backgroundColor = Color.White,
+            properties = DialogProperties(
+                dismissOnBackPress = true,
+                dismissOnClickOutside = true
+            )
+        )
 }

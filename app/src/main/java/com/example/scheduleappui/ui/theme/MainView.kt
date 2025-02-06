@@ -241,16 +241,10 @@ fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: C
                 Text(text = "Annual Leave Request", fontSize = 20.sp, color = Color.White)
             }
             Row(modifier = Modifier.padding(16.dp).clickable{
-                authViewModel.logout()
-                UserPreferences.clearEmail(context)
-                val activity  = context as? android.app.Activity
-                activity?.finishAffinity()
+                logoutUser(context, authViewModel)
             }) {
                 Icon(modifier = Modifier.padding(end = 8.dp).clickable{
-                    authViewModel.logout()
-                    UserPreferences.clearEmail(context)
-                    val activity  = context as? android.app.Activity
-                    activity?.finishAffinity()
+                    logoutUser(context, authViewModel)
                 },
                     painter = painterResource(R.drawable.baseline_share_24),
                     contentDescription = "Logout and Close")
@@ -266,3 +260,9 @@ fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: C
     }
 }
 
+fun logoutUser(context: Context, authViewModel: AuthViewModel) {
+    authViewModel.logout()
+    UserPreferences.clearEmail(context)
+    val activity = context as? android.app.Activity
+    activity?.finishAffinity()
+}
