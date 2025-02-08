@@ -7,90 +7,124 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
+import androidx.compose.material3.Button
 //noinspection UsingMaterialAndMaterial3Libraries
-import androidx.compose.material.Scaffold
-import android.app.DatePickerDialog
+
+import androidx.compose.material3.DatePickerDialog
+import android.os.Build
+
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import com.example.scheduleappui.R
-import java.util.Date
-import android.widget.DatePicker
 
+import androidx.annotation.RequiresApi
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.dp
+import java.time.Instant
+
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnnualLeaveRequestScreen() {
 
-    val startDate = remember { mutableStateOf(Calendar.getInstance()) }
-    val endDate = remember { mutableStateOf(Calendar.getInstance()) }
-    val showStartDateDialog = remember { mutableStateOf(false) }
-    val showEndDateDialog = remember { mutableStateOf(false) }
+    val startDate = remember { mutableStateOf("") }
+    val endDate = remember { mutableStateOf("") }
+    var showStartDateDialog by remember { mutableStateOf(false) }
+    var showEndDateDialog by remember { mutableStateOf(false) }
 
-    Scaffold( topBar = {
-        TopAppBar(title = {
-            Text("Annual leave request", textAlign = TextAlign.Center)
-        },
-            colors = topAppBarColors(
-                containerColor = colorResource(id = R.color.app_bar_color),
-                titleContentColor = colorResource(id = R.color.white),
-            ),
-        )
-    }) {
+
         Column(
-            modifier = Modifier.fillMaxSize().padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Button(onClick = {showStartDateDialog.value = true}) {
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Button(onClick = {showStartDateDialog = true}) {
                     Text(text = "Pick starting date")
                 }
 
-                Button(modifier = Modifier.fillMaxSize(), onClick = {showEndDateDialog.value = true}) {
-                    Text(text = "Pick end date")
+                Button(onClick = {showEndDateDialog = true}) {
+                    Text("Select end date")
                 }
             }
 
-            if (showStartDateDialog.value) {
+            if (showStartDateDialog) {
+                AnnualLeaveDialog {
+                    showStartDateDialog = false
+                }
+            }
 
+            if (showEndDateDialog) {
+                AnnualLeaveDialog { showEndDateDialog = false }
             }
 
         }
-    }
+
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+fun convertMillisToLocalDate(millis: Long): ZonedDateTime {
+    // Interpret the milliseconds as the start of the day in UTC, then convert to Los Angeles time
+    val utcDateAtStartOfDay = Instant
+        .ofEpochMilli(millis)
+        .atZone(ZoneOffset.UTC)
+        .toLocalDate()
+    println("UTC Date at Start of Day: $utcDateAtStartOfDay") // Debugging UTC date
+
+    // Convert to the same instant in Local time zone
+    val localDate = utcDateAtStartOfDay.atStartOfDay(ZoneId.systemDefault())
+    println("Local Date: $localDate") // Debugging local date
+
+    return localDate
+
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun dateToString(date: ZonedDateTime): String {
+    val dateFormatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM, yyyy", Locale.getDefault())
+    return dateFormatter.format(date)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerContent(context: Context) {
-    val year : Int
-    val month : Int
-    val day : Int
-    val selectedDate = remember { mutableStateOf("") }
+fun AnnualLeaveDialog(onDismiss : () -> Unit) {
+    val dateState = rememberDatePickerState()
+    val millisToLocalDate = dateState.selectedDateMillis?.let {
+       convertMillisToLocalDate(it)
+    }
 
-    val calendar = Calendar.getInstance()
+    val dateToString = millisToLocalDate?.let {
+        dateToString(millisToLocalDate)
+    }
 
-    year = calendar.get(Calendar.YEAR)
-    month = calendar.get(Calendar.MONTH)
-    day = calendar.get(Calendar.DAY_OF_MONTH)
+    DatePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            Button(onClick = onDismiss){
+                Text("Select")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    ) {
+        DatePicker(state = dateState, showModeToggle = true)
+    }
 
-    calendar.time = Date()
-
-    val datePickerDialog = DatePickerDialog(
-        context,
-        {_ : DatePicker, year :Int, month: kotlin.Int, day : kotlin.Int ->
-            selectedDate.value = "$day/${month + 1}/$year"
-        }, year, month, day
-
-    )
 }

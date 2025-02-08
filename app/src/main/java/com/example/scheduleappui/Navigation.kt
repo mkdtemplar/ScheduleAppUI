@@ -1,5 +1,7 @@
 package com.example.scheduleappui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -8,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.scheduleappui.ui.theme.AccountView
+import com.example.scheduleappui.ui.theme.AnnualLeaveRequestScreen
 import com.example.scheduleappui.ui.theme.AppSwitcher
 import com.example.scheduleappui.ui.theme.Assignments
 import com.example.scheduleappui.ui.theme.AssignmentsLibraryBrowse
@@ -17,6 +20,7 @@ import com.example.scheduleappui.ui.theme.PositionsBottomScreen
 import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shift
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : PaddingValues){
 
@@ -47,6 +51,10 @@ fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : 
 
         composable(Screen.BottomScreen.Positions.bRoute) {
             Positions()
+        }
+
+        composable("al") {
+            AnnualLeaveRequestScreen()
         }
 
     }

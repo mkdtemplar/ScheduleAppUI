@@ -139,6 +139,7 @@ fun MainView(){
             modifier = modifier,
             authViewModel = authViewModel,
             context = context,
+            controller
         )
     },
         sheetState = modalSheetState,
@@ -226,7 +227,7 @@ fun DrawerItem(
 }
 
 @Composable
-fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: Context) {
+fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: Context, controller: NavHostController) {
 
     Box(
         Modifier.fillMaxWidth().height(300.dp).background(
@@ -234,7 +235,9 @@ fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: C
     ) {
         Column(modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween) {
-            Row(modifier = Modifier.padding(16.dp)) {
+            Row(modifier = Modifier.padding(16.dp).clickable{
+                controller.navigate("al")
+            }) {
                 Icon(modifier = Modifier.padding(end = 8.dp),
                     painter = painterResource(R.drawable.baseline_settings_24),
                     contentDescription = "Annual Leave Request")
