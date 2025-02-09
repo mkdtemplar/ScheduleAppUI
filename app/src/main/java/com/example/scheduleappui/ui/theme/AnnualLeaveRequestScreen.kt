@@ -1,28 +1,21 @@
 package com.example.scheduleappui.ui.theme
 
-import android.content.Context
-import android.icu.util.Calendar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-//noinspection UsingMaterialAndMaterial3Libraries
-
 import androidx.compose.material3.DatePickerDialog
 import android.os.Build
 import android.widget.Toast
-
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.rememberDatePickerState
@@ -32,16 +25,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.scheduleappui.AnnualLeaveViewModel
-import com.example.scheduleappui.models.AnnualLeaveModel
 import com.example.scheduleappui.userpreferences.UserPreferences
 import java.time.Instant
-
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import com.example.scheduleappui.Result
 
 var startDateGlobal : String = ""
 var endDateGlobal : String = ""
@@ -93,13 +83,13 @@ fun AnnualLeaveRequestScreen() {
             }
 
             if (showStartDateDialog) {
-                startDateGlobal = AnnualLeaveDialog {
+                startDateGlobal = annualLeaveDialog {
                     showStartDateDialog = false
                 }
             }
 
             if (showEndDateDialog) {
-               endDateGlobal =  AnnualLeaveDialog { showEndDateDialog = false }
+               endDateGlobal =  annualLeaveDialog { showEndDateDialog = false }
             }
         }
 }
@@ -125,7 +115,7 @@ fun dateToString(date: ZonedDateTime): String {
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnnualLeaveDialog(onDismiss : () -> Unit) : String{
+fun annualLeaveDialog(onDismiss : () -> Unit) : String{
     val dateState = rememberDatePickerState()
     val millisToLocalDate = dateState.selectedDateMillis?.let {
        convertMillisToLocalDate(it)
