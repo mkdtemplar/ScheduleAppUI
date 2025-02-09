@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 
 import androidx.compose.material3.DatePickerDialog
 import android.os.Build
+import android.widget.Toast
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -27,7 +28,12 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.scheduleappui.AnnualLeaveViewModel
+import com.example.scheduleappui.models.AnnualLeaveModel
+import com.example.scheduleappui.userpreferences.UserPreferences
 import java.time.Instant
 
 import java.time.ZoneId
@@ -35,17 +41,20 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import com.example.scheduleappui.Result
+
+var startDateGlobal : String = ""
+var endDateGlobal : String = ""
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnnualLeaveRequestScreen() {
 
-    val startDate = remember { mutableStateOf("") }
-    val endDate = remember { mutableStateOf("") }
     var showStartDateDialog by remember { mutableStateOf(false) }
     var showEndDateDialog by remember { mutableStateOf(false) }
-
+    val annualLeaveViewModel : AnnualLeaveViewModel = viewModel()
+    val context = LocalContext.current
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -61,37 +70,52 @@ fun AnnualLeaveRequestScreen() {
                     Text("Select end date")
                 }
             }
+            Column(modifier = Modifier.padding(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Row(horizontalArrangement = Arrangement.Center) {
+                    Button(
+                        onClick = {
+                           val result =  annualLeaveViewModel.createAnnualLeave(startDateGlobal,
+                                endDateGlobal, UserPreferences.getEmail(context).toString())
+                            if (result.toString().isNotEmpty()) {
+                                Toast.makeText(context, "Annual leave submitted", Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(context, "Annual leave NOT submitted", Toast.LENGTH_LONG).show()
+                            }
+                        },
+
+                    ) {
+                        Text("Submit")
+                    }
+                }
+            }
 
             if (showStartDateDialog) {
-                AnnualLeaveDialog {
+                startDateGlobal = AnnualLeaveDialog {
                     showStartDateDialog = false
                 }
             }
 
             if (showEndDateDialog) {
-                AnnualLeaveDialog { showEndDateDialog = false }
+               endDateGlobal =  AnnualLeaveDialog { showEndDateDialog = false }
             }
-
         }
-
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun convertMillisToLocalDate(millis: Long): ZonedDateTime {
-    // Interpret the milliseconds as the start of the day in UTC, then convert to Los Angeles time
     val utcDateAtStartOfDay = Instant
         .ofEpochMilli(millis)
         .atZone(ZoneOffset.UTC)
         .toLocalDate()
-    println("UTC Date at Start of Day: $utcDateAtStartOfDay") // Debugging UTC date
 
-    // Convert to the same instant in Local time zone
     val localDate = utcDateAtStartOfDay.atStartOfDay(ZoneId.systemDefault())
-    println("Local Date: $localDate") // Debugging local date
 
     return localDate
-
 }
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun dateToString(date: ZonedDateTime): String {
     val dateFormatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM, yyyy", Locale.getDefault())
@@ -101,15 +125,15 @@ fun dateToString(date: ZonedDateTime): String {
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnnualLeaveDialog(onDismiss : () -> Unit) {
+fun AnnualLeaveDialog(onDismiss : () -> Unit) : String{
     val dateState = rememberDatePickerState()
     val millisToLocalDate = dateState.selectedDateMillis?.let {
        convertMillisToLocalDate(it)
     }
 
-    val dateToString = millisToLocalDate?.let {
+    var dateString = millisToLocalDate?.let {
         dateToString(millisToLocalDate)
-    }
+    }.toString()
 
     DatePickerDialog(
         onDismissRequest = onDismiss,
@@ -127,4 +151,5 @@ fun AnnualLeaveDialog(onDismiss : () -> Unit) {
         DatePicker(state = dateState, showModeToggle = true)
     }
 
+    return dateString
 }
