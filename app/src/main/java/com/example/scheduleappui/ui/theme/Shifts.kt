@@ -130,6 +130,7 @@ fun ShiftAlertDialog(shift : String, onDismiss : () -> Unit) {
                         .padding(8.dp)) {
                         Text(text = staff)
                     }
+                    Divider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 8.dp))
                 }
             }
         },

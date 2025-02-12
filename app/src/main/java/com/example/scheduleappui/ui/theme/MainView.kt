@@ -254,7 +254,9 @@ fun MoreBottomSheet(modifier: Modifier, authViewModel: AuthViewModel, context: C
                     contentDescription = "Logout and Close")
                 Text(text = "Logout and Close", fontSize = 20.sp, color = Color.White)
             }
-            Row(modifier = Modifier.padding(16.dp)) {
+            Row(modifier = Modifier.padding(16.dp).clickable{
+                controller.navigate("help")
+            }) {
                 Icon(modifier = Modifier.padding(end = 8.dp),
                     painter = painterResource(R.drawable.baseline_help_center_24),
                     contentDescription = "Help")
