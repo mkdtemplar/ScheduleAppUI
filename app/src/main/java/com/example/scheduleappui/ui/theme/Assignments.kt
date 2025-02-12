@@ -19,7 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -30,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.scheduleappui.AssignmentsViewModel
-import com.example.scheduleappui.screen.AssignmentsItem
+import com.example.scheduleappui.screen.AssignmentsItemFirebase
 
 @Composable
 fun Assignments() {
@@ -47,7 +46,7 @@ fun Assignments() {
             Column(modifier = Modifier.padding(8.dp)) {
                 LazyColumn {
                     items(assignments){
-                            assignment -> AssignmentsItem(
+                            assignment -> AssignmentsItemFirebase(
                         assignment,
                     )
                         Row(

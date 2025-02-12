@@ -25,7 +25,7 @@ import com.example.scheduleappui.R
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home() {
-    val categories = listOf("V.I.P Entrance", "Main Entrance", "Main Entrance", "Main Entrance", "Restricted")
+    val categories = listOf("V.I.P Entrance", "Main Entrance", "Armory", "Warehouse", "Restricted")
     val gruped = listOf<String>("Day Shift", "Evening Shift", "Night Shift").groupBy { it[0] }
 
     LazyColumn {
@@ -35,7 +35,7 @@ fun Home() {
                 LazyRow {
                     items(categories) {
                         cat ->
-                        BrowserItem(cat, R.drawable.baseline_apps_24)
+                        AssingnmentItem(cat, R.drawable.baseline_apps_24)
                     }
                 }
             }
@@ -44,7 +44,7 @@ fun Home() {
 }
 
 @Composable
-fun BrowserItem(category : String, drawable : Int) {
+fun AssingnmentItem(category : String, drawable : Int) {
     Card(modifier = Modifier.padding(16.dp).size(200.dp),
         border = BorderStroke(3.dp, color = Color.DarkGray)) {
 

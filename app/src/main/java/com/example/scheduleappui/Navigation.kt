@@ -11,14 +11,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.scheduleappui.ui.theme.AccountView
 import com.example.scheduleappui.ui.theme.AnnualLeaveRequestScreen
-import com.example.scheduleappui.ui.theme.AppSwitcher
 import com.example.scheduleappui.ui.theme.Assignments
 import com.example.scheduleappui.ui.theme.AssignmentsLibraryBrowse
 import com.example.scheduleappui.ui.theme.Home
-import com.example.scheduleappui.ui.theme.MainView
-import com.example.scheduleappui.ui.theme.PositionsBottomScreen
 import com.example.scheduleappui.ui.theme.Positions
-import com.example.scheduleappui.ui.theme.Shift
+import com.example.scheduleappui.ui.theme.Shifts
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -35,7 +32,7 @@ fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : 
         }
 
         composable(Screen.DrawerScreen.Shift.route) {
-            Shift()
+            Shifts()
         }
         composable(Screen.DrawerScreen.Assigments.route) {
             Assignments()
@@ -46,7 +43,7 @@ fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : 
         }
 
         composable(Screen.BottomScreen.Assignments.bRoute) {
-            Assignments()
+           Assignments()
         }
 
         composable(Screen.BottomScreen.Positions.bRoute) {

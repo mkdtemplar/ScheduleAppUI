@@ -21,3 +21,15 @@ val shiftsLibrary = listOf<Dummy>(
     Dummy(R.drawable.baseline_light_24, "Evening Shift"),
     Dummy(R.drawable.baseline_nightlight_round_24, "Night Shift")
 )
+
+val dayShiftStaff = listOf<String>(
+    "OP1", "OP2", "OP3"
+)
+
+val eveningShiftStaff = listOf<String>(
+    "OP4", "OP5", "OP6"
+)
+
+val nightShiftStaff = listOf<String>(
+    "OP7", "OP8", "OP9"
+)

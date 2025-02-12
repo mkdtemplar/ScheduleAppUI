@@ -1,5 +1,6 @@
 package com.example.scheduleappui.ui.theme
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,19 +33,23 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import com.example.scheduleappui.sendmail.SendEmail
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 var startDateGlobal : String = ""
 var endDateGlobal : String = ""
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, DelicateCoroutinesApi::class)
 @Composable
 fun AnnualLeaveRequestScreen() {
 
     var showStartDateDialog by remember { mutableStateOf(false) }
     var showEndDateDialog by remember { mutableStateOf(false) }
     val annualLeaveViewModel : AnnualLeaveViewModel = viewModel()
-    val context = LocalContext.current
+    val context : Context  = LocalContext.current
+
+
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -70,10 +75,11 @@ fun AnnualLeaveRequestScreen() {
                            val result =  annualLeaveViewModel.createAnnualLeave(startDateGlobal,
                                 endDateGlobal, UserPreferences.getEmail(context).toString())
                             if (result.toString().isNotEmpty()) {
-                                Toast.makeText(context, "Annual leave submitted", Toast.LENGTH_LONG).show()
+                                SendEmail(context)
                             } else {
-                                Toast.makeText(context, "Annual leave NOT submitted", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, "Annual leave NOT submitted ", Toast.LENGTH_LONG).show()
                             }
+                            //Toast.makeText(context, GetEnv(), Toast.LENGTH_LONG).show()
                         },
 
                     ) {

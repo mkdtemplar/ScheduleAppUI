@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import com.example.scheduleappui.models.AssignmentsModel
 
 @Composable
-fun AssignmentsItem(assignmentsModel: AssignmentsModel) {
+fun AssignmentsItemFirebase(assignmentsModel: AssignmentsModel) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
