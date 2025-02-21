@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +8,9 @@ plugins {
     id("com.google.gms.google-services")
     id("kotlin-kapt")
 }
+
+val app_id = gradleLocalProperties(rootDir, providers).
+    getProperty("api_key", "")
 
 android {
     namespace = "com.example.scheduleappui"
@@ -19,6 +24,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue(
+            "string",
+            "api_key",
+            "\"" + app_id + "\""
+        )
     }
 
     buildTypes {
@@ -46,7 +57,6 @@ android {
             excludes += listOf("META-INF/NOTICE.md", "META-INF/LICENSE.md")
         }
     }
-
 }
 
 dependencies {
