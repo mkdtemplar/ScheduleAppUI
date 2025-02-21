@@ -75,11 +75,12 @@ fun AnnualLeaveRequestScreen() {
                            val result =  annualLeaveViewModel.createAnnualLeave(startDateGlobal,
                                 endDateGlobal, UserPreferences.getEmail(context).toString())
                             if (result.toString().isNotEmpty()) {
-                                SendEmail(context)
+                                SendEmail(context, UserPreferences.getEmail(context).toString(),
+                                    "Annual leave from $startDateGlobal until $endDateGlobal"
+                                    )
                             } else {
                                 Toast.makeText(context, "Annual leave NOT submitted ", Toast.LENGTH_LONG).show()
                             }
-                            //Toast.makeText(context, GetEnv(), Toast.LENGTH_LONG).show()
                         },
 
                     ) {
