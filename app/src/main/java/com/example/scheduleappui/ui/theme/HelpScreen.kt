@@ -38,7 +38,6 @@ import com.example.scheduleappui.userpreferences.UserPreferences
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HelpScreen() {
-    var showDialog by remember { mutableStateOf(false) }
     var messageValue by remember { mutableStateOf("") }
     val context: Context = LocalContext.current
 
@@ -56,14 +55,13 @@ fun HelpScreen() {
             maxLines = 10,
             minLines = 3
         )
-
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             onClick = {
                 if (messageValue.isNotEmpty()) {
                     SendEmail(context, UserPreferences.getEmail(context).toString(),
-                        "Report send $messageValue"
+                        "Report send\n$messageValue"
                         )
                 }
             }
