@@ -91,28 +91,28 @@ dependencies {
 
     // Saved state module for ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
-    implementation("androidx.compose.runtime:runtime:1.7.7")
-    implementation("androidx.compose.runtime:runtime-livedata:1.7.7")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.7.7")
+    implementation("androidx.compose.runtime:runtime:1.7.8")
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.8")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.7.8")
 
     // Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:2.8.7")
 
     // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:2.8.6")
-    implementation("androidx.compose.material:material:1.7.7")
-    implementation("androidx.compose.ui:ui:1.7.7")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.7")
+    implementation("androidx.navigation:navigation-compose:2.8.7")
+    implementation("androidx.compose.material:material:1.7.8")
+    implementation("androidx.compose.ui:ui:1.7.8")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
 
     // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:2.8.6")
-    implementation("androidx.navigation:navigation-ui:2.8.6")
+    implementation("androidx.navigation:navigation-fragment:2.8.7")
+    implementation("androidx.navigation:navigation-ui:2.8.7")
 
     // Feature module support for Fragments
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.8.6")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.8.7")
 
     // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:2.8.6")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.8.7")
 
     // JSON serialization library, works with the Kotlin serialization plugin
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
