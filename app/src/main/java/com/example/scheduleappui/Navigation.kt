@@ -13,6 +13,7 @@ import com.example.scheduleappui.ui.theme.AccountView
 import com.example.scheduleappui.ui.theme.AnnualLeaveRequestScreen
 import com.example.scheduleappui.ui.theme.Assignments
 import com.example.scheduleappui.ui.theme.AssignmentsLibraryBrowse
+import com.example.scheduleappui.ui.theme.HelpScreen
 import com.example.scheduleappui.ui.theme.Home
 import com.example.scheduleappui.ui.theme.Positions
 import com.example.scheduleappui.ui.theme.Shifts
@@ -52,6 +53,10 @@ fun Navigation(navController: NavHostController, viewModel: MainViewModel, pd : 
 
         composable("al") {
             AnnualLeaveRequestScreen()
+        }
+
+        composable("help") {
+            HelpScreen()
         }
 
     }
