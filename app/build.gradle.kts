@@ -99,26 +99,26 @@ dependencies {
     kapt("androidx.lifecycle:lifecycle-compiler:2.8.7")
 
     // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:2.8.7")
+    implementation("androidx.navigation:navigation-compose:2.8.8")
     implementation("androidx.compose.material:material:1.7.8")
     implementation("androidx.compose.ui:ui:1.7.8")
     implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
 
     // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:2.8.7")
-    implementation("androidx.navigation:navigation-ui:2.8.7")
+    implementation("androidx.navigation:navigation-fragment:2.8.8")
+    implementation("androidx.navigation:navigation-ui:2.8.8")
 
     // Feature module support for Fragments
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.8.7")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.8.8")
 
     // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:2.8.7")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.8.8")
 
     // JSON serialization library, works with the Kotlin serialization plugin
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
-    implementation("com.google.firebase:firebase-analytics:22.2.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+    implementation("com.google.firebase:firebase-analytics:22.3.0")
 
     implementation("com.google.firebase:firebase-auth:23.2.0")
     implementation("com.google.firebase:firebase-firestore:25.1.2")
@@ -127,6 +127,6 @@ dependencies {
 
     implementation("com.sun.mail:android-mail:1.6.7")
 
-    implementation("io.github.cdimascio:dotenv-kotlin:6.5.0")
+    implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
     implementation("com.google.android.gms:play-services-auth:21.3.0")
 }
