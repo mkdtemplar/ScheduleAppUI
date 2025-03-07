@@ -118,6 +118,11 @@ fun AlertDialogAccount(onDismiss : () -> Unit) {
                     .padding(8.dp)) {
                     Text(text = "User: ${UserPreferences.getEmail(context).toString()}")
                 }
+                Box( modifier = Modifier
+                    .wrapContentHeight()
+                    .padding(8.dp)) {
+                    Text(text = "Name: Operator 1")
+                }
             }
         },
         buttons = {
