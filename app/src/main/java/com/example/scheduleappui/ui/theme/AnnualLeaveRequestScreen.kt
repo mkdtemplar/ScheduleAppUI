@@ -47,7 +47,7 @@ fun AnnualLeaveRequestScreen() {
     var showStartDateDialog by remember { mutableStateOf(false) }
     var showEndDateDialog by remember { mutableStateOf(false) }
     val annualLeaveViewModel: AnnualLeaveViewModel = viewModel()
-    val context: Context = LocalContext.current
+    val context:Context = LocalContext.current
 
         Column(
             modifier = Modifier.fillMaxSize(),
